@@ -11,8 +11,6 @@ package_upgrade: false
 packages:
   - vim
   - wget
-  - snapd
 runcmd:
-  - snap install microk8s --classic
-  - usermod -a -G microk8s gaidar
-  - chown -f -R gaidar /home/gaidar/.kube
+  - apt purge motd-news-config
+  - rm -f /etc/update-motd.d/*

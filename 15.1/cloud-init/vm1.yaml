@@ -11,29 +11,6 @@ package_upgrade: false
 packages:
   - vim
   - wget
-  # - snapd
-# runcmd:
-  # - mkdir -p /home/gaidar/.kube
-  # - snap install microk8s --classic
-  # - usermod -a -G microk8s gaidar
-  # - chown -f -R gaidar /home/gaidar/.kube
-  # - sleep 1m
-  # - microk8s enable ingress
-  # - microk8s enable hostpath-storage
-  # - microk8s enable rbac
-
-# microk8s config
-# sed -i '/IP\.2 = [0-9.]\+/a IP.3 = '$(wget -O - -q icanhazip.com)'' /var/snap/microk8s/current/certs/csr.conf.template
-# sudo microk8s refresh-certs --cert front-proxy-client.crt
-
-# ssh $(terraform output -json vm_details | jq -r '.[0].ip_address') "microk8s config" | sed "s|    server: https://.*|    server: https://$(terraform output -json vm_details | jq -r '.[0].ip_address'):16443|" > ~/.kube/config
-
-
-#  openssl genrsa -out gaidar.key 2048
-#  openssl req -new -key gaidar.key -out gaidar.csr -subj "/CN=gaidar/O=gaidar-netology"
-#  scp $(terraform output -json vm_details | jq -r '.[0].ip_address'):/var/snap/microk8s/current/certs/ca.crt .
-#  scp $(terraform output -json vm_details | jq -r '.[0].ip_address'):/var/snap/microk8s/current/certs/ca.key .
-#  openssl x509 -req -in gaidar.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out gaidar.crt -days 365
-#  kubectl config set-credentials gaidar --client-certificate=gaidar.crt --client-key=gaidar.key --embed-certs=true
-#  kubectl config set-context gaidar-context --cluster=microk8s-cluster --user=gaidar
-#  kubectl config use-context gaidar-context
+runcmd:
+  - apt purge motd-news-config
+  - rm -f /etc/update-motd.d/*
