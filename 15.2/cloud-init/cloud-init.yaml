@@ -1,0 +1,24 @@
+#cloud-config
+users:
+  - name: gaidar
+    groups: sudo
+    shell: /bin/bash
+    sudo: ["ALL=(ALL) NOPASSWD:ALL"]
+    ssh_authorized_keys:
+      - ${vms_ssh_root_key}
+package_update: true
+package_upgrade: false
+packages:
+  - vim
+  - wget
+write_files:
+  - path: /root/init.sh
+    permissions: '0755'
+    content: |
+      #!/bin/bash
+      apt purge -y motd-news-config
+      rm -f /etc/update-motd.d/*
+      IP_ADDRESS=$(curl -s http://ifconfig.me)
+      echo "<html><body><h1>Picture from gaidar-vu-student-1986-02-25 Bucket</h1><h2>External IP Address: $IP_ADDRESS</h2><img src='https://storage.yandexcloud.net/gaidar-vu-student-1986-02-25/uploaded_image.jpg'></body></html>" > /var/www/html/index.html
+runcmd:
+  - /root/init.sh
