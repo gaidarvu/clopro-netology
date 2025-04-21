@@ -74,7 +74,7 @@ variable "group_instance_config" {
     preemptible       = true
     nat               = true
     scale_policy      = 3
-    max_unavailable   = 2
+    max_unavailable   = 1
     max_creating      = 3
     max_expansion     = 1
     max_deleting      = 2

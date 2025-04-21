@@ -53,14 +53,14 @@ resource "yandex_compute_instance_group" "my_group_instances" {
 
   scale_policy {
     fixed_scale {
-      size = var.group_instance_config.scale_policy
+      size                = var.group_instance_config.scale_policy
     }
   }
   deploy_policy {
-    max_unavailable       = 1
-    max_creating          = 2
-    max_expansion         = 1
-    max_deleting          = 1
+    max_unavailable       = var.group_instance_config.max_unavailable
+    max_creating          = var.group_instance_config.max_creating
+    max_expansion         = var.group_instance_config.max_expansion
+    max_deleting          = var.group_instance_config.max_deleting
   }
   allocation_policy {
     zones                 = [var.default_zone]
