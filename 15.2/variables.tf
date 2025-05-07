@@ -133,3 +133,23 @@ variable "target_group_name" {
   default               = "target-group"
   description           = "target-group name"
   }
+
+variable "kms_key_name" {
+  default               = "s3-bucket-key"
+  description           = "kms-key name"
+  }
+
+variable "kms_key_algorithm" {
+  default               = "AES_256"
+  description           = "kms-key algorithm"
+  }
+
+variable "kms_key_expiration" {
+  default               = "8760h"
+  description           = "kms-key expiration"
+  }
+
+variable "sse_algorithm" {
+  default               = "aws:kms"
+  description           = "sse algorithm"
+  }
